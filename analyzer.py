@@ -13,6 +13,7 @@ for ligne in lignes :
 
 list_ip  = []
 list_users = []
+compteur = {}  
 
 for i, mot in enumerate(tout) :
     if mot == "from" :
@@ -22,4 +23,9 @@ for i, mot in enumerate(tout) :
 
 print(list_ip,list_users)
 
+
+for ip in list_ip :
+    compteur[ip] = compteur.get(ip, 0) + 1
+
+print(compteur)
 
