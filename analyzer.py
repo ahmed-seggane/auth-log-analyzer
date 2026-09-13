@@ -8,14 +8,18 @@ tout = [ ]
 
 for ligne in lignes :
 
-    tout.extend(lignes.split())
+    tout.extend(ligne.split())
     
 
 list_ip  = []
-
+list_users = []
 
 for i, mot in enumerate(tout) :
     if mot == "from" :
         list_ip.append(tout[i+1])
+        list_users.append(tout[i-1])
+        
 
-print(list_ip )
+print(list_ip,list_users)
+
+
