@@ -21,11 +21,22 @@ for i, mot in enumerate(tout) :
         list_users.append(tout[i-1])
         
 
-print(list_ip,list_users)
+#print(list_ip,list_users)
 
 
 for ip in list_ip :
     compteur[ip] = compteur.get(ip, 0) + 1
 
-print(compteur)
+#print(compteur)
 
+bigger = 0 
+bigger_ip = ""
+
+
+for ip, occurence in compteur.items():
+    if occurence>bigger :
+        bigger = occurence 
+        bigger_ip = ip
+
+
+print(bigger, bigger_ip)        
