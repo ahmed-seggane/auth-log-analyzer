@@ -47,7 +47,28 @@ def main():
     print(Counter(users))
     print(Counter(statuses))
     print(Counter(ips).most_common(3))
- 
+
+    statuses_count = Counter(statuses)
+    ips_count = Counter(ips)
+
+    print("\n=== SSH login report ===\n")
+
+    print(f"{'Total attempts':<18}{len(log_lines):>3}")
+    print(f"{'Failed':<18}{statuses_count['Failed']:>3}")
+    print(f"{'Accepted':<18}{statuses_count['Accepted']:>3}")
+
+    print("\nTop source IPs")
+    for ip, count in Counter(ips).most_common():
+        print(f"  {ip:<16}{count:>3}")
+
+    print("\nTargeted users")
+    for user, count in Counter(users).most_common():
+        print(f"  {user:<16}{count:>3}")    
+
+    print("\n\n")
+    
+    
+
 
 if __name__ == "__main__":
     main()
