@@ -1,3 +1,6 @@
+from collections import Counter
+
+
 lignes = [
     "Sep  7 03:11:09 srv-web-01 sshd[4131]: Failed password for root from 203.0.113.42 port 51502 ssh2",
     "Sep  7 03:11:02 srv-web-01 sshd[4127]: Failed password for invalid user admin from 203.0.113.42 port 51422 ssh2",
@@ -13,7 +16,7 @@ for ligne in lignes :
 
 list_ip  = []
 list_users = []
-compteur = {}  
+compteur = Counter(list_ip)
 
 for i, mot in enumerate(tout) :
     if mot == "from" :
@@ -29,14 +32,6 @@ for ip in list_ip :
 
 #print(compteur)
 
-bigger = 0 
-bigger_ip = ""
-
-
-for ip, occurence in compteur.items():
-    if occurence>bigger :
-        bigger = occurence 
-        bigger_ip = ip
-
-
-print(bigger, bigger_ip)        
+print(compteur)                    # Counter({'203.0.113.42': 2, '192.0.2.15': 1})
+print(compteur.most_common(1))     # [('203.0.113.42', 2)]
+print(compteur.most_common(3))     # le top 3, trié
