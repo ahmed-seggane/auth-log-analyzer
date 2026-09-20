@@ -1,9 +1,6 @@
+import argparse
 from collections import Counter
 
-log_lines = []
-with open("sample_auth.log", encoding="utf-8") as f:
-    for line in f:
-        log_lines.append(line.strip())
 
 
 def extract_ip(line):
@@ -24,6 +21,16 @@ def extract_status(line):
     return "Accepted"
 
 def main():
+
+    parser = argparse.ArgumentParser(description="Analyse SSH login attempts in an auth.log file.")
+    parser.add_argument("file", help="path to the log file")
+    args = parser.parse_args()
+
+    log_lines = []
+    with open(args.file, encoding="utf-8") as f:
+        for line in f:
+            log_lines.append(line.strip())
+
     ips = []
     users = []
     statuses = []
