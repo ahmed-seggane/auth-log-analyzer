@@ -1,24 +1,33 @@
 import argparse
+import re
 from collections import Counter
 
 
-
 def extract_ip(line):
-    """Return the source IP address found in a log line."""
-    parts = line.split()
-    return parts[parts.index("from") + 1]
+    """Return the source IP address found in a log line, or None."""
+
+    m = re.search(r"from (\S+)", line)
+    if m is not None :
+        return m.group(1)
+    return None 
+
 
 def extract_user(line):
-    """Return the username  found in a log line."""
-    parts = line.split()
-    return parts[parts.index("from") -1]
+    """Return the username found in a log line, or None."""
+
+    m = re.search(r"for (?:invalid user )?(\S+) from", line)
+    if m is not None :
+        return m.group(1)
+
+    return None
 
 def extract_status(line):
-    """Return "Failed" or "Accepted" for a log line."""
-    parts = line.split()
-    if "Failed" in parts:
-        return "Failed"
-    return "Accepted"
+    """Return "Failed" or "Accepted" for a log line, or None."""
+    m = re.search(r"(Failed|Accepted) (?:password|publickey) for", line)
+    if m is not None:
+        return m.group(1)
+    return None
+    
 
 def main():
 
@@ -36,9 +45,16 @@ def main():
     statuses = []
 
     for line in log_lines:
-        ips.append(extract_ip(line))
-        users.append(extract_user(line))
-        statuses.append(extract_status(line))
+        ip = extract_ip(line)
+        user = extract_user(line)
+        status = extract_status(line)
+
+        if ip is None or user is None or status is None:
+            continue
+
+        ips.append(ip)
+        users.append(user)
+        statuses.append(status)
 
     
     statuses_count = Counter(statuses)

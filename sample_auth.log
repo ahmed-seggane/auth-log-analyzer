@@ -10,3 +10,6 @@ Sep  7 09:30:12 srv-web-01 sshd[6210]: Failed password for invalid user postgres
 Sep  7 09:30:15 srv-web-01 sshd[6210]: Failed password for invalid user postgres from 198.51.100.7 port 40574 ssh2
 Sep  7 11:58:40 srv-web-01 sshd[7002]: Accepted publickey for ahmed from 192.0.2.15 port 50044 ssh2
 Sep  7 23:47:31 srv-web-01 sshd[9310]: Failed password for root from 203.0.113.42 port 52110 ssh2
+Sep  7 03:15:22 srv-web-01 sshd[4160]: Connection closed by authenticating user root 203.0.113.42 port 51702 [preauth]
+Sep  7 07:10:05 srv-web-01 sudo:    ahmed : TTY=pts/0 ; PWD=/home/ahmed ; USER=root ; COMMAND=/usr/bin/apt update
+Sep  7 08:00:01 srv-web-01 CRON[6001]: pam_unix(cron:session): session opened for user root(uid=0)
